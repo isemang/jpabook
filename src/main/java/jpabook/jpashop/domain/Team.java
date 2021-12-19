@@ -23,6 +23,11 @@ public class Team {
     //mappedBy가 적혀져 있는 애는 "주인이 아니다" / 조회만 가능하다
     //이 연관관계의 주인은 Member객체 안에 설정되어있는 Team이다!
     private List<Member> members = new ArrayList<>();
+
+    public void addMember(Member member) {
+        member.setTeam(this);
+        members.add(member);
+    }
 }
 /*
 mappedBy 완전 중요.!!
