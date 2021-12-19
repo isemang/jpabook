@@ -12,7 +12,6 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-@ToString
 public class Item {
 
     @Id

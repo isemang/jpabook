@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,15 +18,12 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "USERNAME")
-    private String username;
+    private String name;
 
-//    @Column(name = "TEAM_ID")   //참조 대신 외래키를 그대로 사용
-//    private Long teamId;
+    private String city;
+    private String street;
+    private String zipcode;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    //하나의 팀에 여러 사람이 소속됨 -> manyToOne(member입장에선 many, team입장에서는 one)
-    private Team team;  //Team과 Member의 관계가 일대다, 다대일 관계인지 알려줘야 함
-
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 }

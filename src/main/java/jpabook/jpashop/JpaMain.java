@@ -1,6 +1,8 @@
 package jpabook.jpashop;
 
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.Team;
 
 import javax.persistence.EntityManager;
@@ -19,31 +21,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            
-            //저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
+            Order order = new Order();
+            em.persist(order);
+//            order.addOrderItem(new OrderItem());
 
-            Member member = new Member();
-            member.setUsername("member1");
-            em.persist(member);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
 
-            team.addMember(member);
-
-            //양방향 연관관계의 경우, 양쪽에 다 값을 세팅해야한다
-            //순수 객체 상태를 고려해서 항상 양쪽에 다 값을 설정하자!!
-//            team.getMembers().add(member);
-
-            em.flush();
-            em.clear();
-
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-
-            for (Member m : members) {
-                System.out.println("member.getUsername() = " + member.getUsername());
-            }
+            em.persist(orderItem);
 
             tx.commit();
         } catch (Exception e){
