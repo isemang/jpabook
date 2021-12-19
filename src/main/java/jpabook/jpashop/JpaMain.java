@@ -23,6 +23,7 @@ public class JpaMain {
             //저장
             Team team = new Team();
             team.setName("TeamA");
+//            team.getMembers().add(member);
             em.persist(team);
 
             Member member = new Member();
@@ -33,11 +34,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
 
             for (Member m : members) {
-                System.out.println("m = " + m.getUsername());
+                System.out.println("member.getUsername() = " + member.getUsername());
             }
 
             tx.commit();
