@@ -23,13 +23,16 @@ public class JpaMain {
             //저장
             Team team = new Team();
             team.setName("TeamA");
-//            team.getMembers().add(member);
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+            member.changeTeam(team);
             em.persist(member);
+            
+            //양방향 연관관계의 경우, 양쪽에 다 값을 세팅해야한다
+            //순수 객체 상태를 고려해서 항상 양쪽에 다 값을 설정하자!!
+//            team.getMembers().add(member);
 
             em.flush();
             em.clear();
